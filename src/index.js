@@ -26,14 +26,10 @@ function displayTasks(){
 
         const checkBox = document.createElement("input");
         checkBox.setAttribute("type", "checkbox");
+        checkBox.classList.add("toDo-check")
         card.appendChild(checkBox);
+        removeTasks();
 
-        checkBox.addEventListener("change", function() {
-            if (this.checked){
-                storeTasks.splice(this.parentElement.getAttribute("data-index"), 1);
-                this.parentElement.remove();
-            }
-        })
         for (let eachTask in tasks){
             const txt = document.createElement("p");
             txt.textContent = `${tasks[eachTask]}`;
@@ -42,7 +38,15 @@ function displayTasks(){
     });
 }
 
-console.log(storeTasks[0]);
+function removeTasks(){
+    const checkBox = document.querySelector(".toDo-check")
+    checkBox.addEventListener("change", function() {
+        if (this.checked){
+            storeTasks.splice(this.parentElement.getAttribute("data-index"), 1);
+            this.parentElement.remove();
+        }
+    })
+}
 
 class Project{
     constructor(projectName){
