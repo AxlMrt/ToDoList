@@ -1,1 +1,1 @@
-console.log(document.querySelector("h1"));
+(()=>{const t=new class{constructor(t,i,s,e){this.title=t,this.description=i,this.dueDate=s,this.priority=e}}("titre","descriptif","19.09.22","maximum");console.log(t)})();
