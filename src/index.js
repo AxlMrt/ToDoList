@@ -1,38 +1,52 @@
-let toDoStore = [];
+let storeTasks = [];
+let storeProjects = [];
 
-class toDo{
-    constructor(title, description, dueDate, priority){
+class Task{
+    constructor(title, description, dueDate){
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
-        this.priority = priority;
-
-        return {title, description, dueDate, priority}
     }
 }
 
-(function storeToDo(){
-    const newTodo = new toDo("titre", "descriptif", "19.09.22", "maximum");
-    toDoStore.push(newTodo);
+(function pushTasks(){
+    const newTodo = new Task("titre", "descriptif", "19.09.22");
+    storeTasks.push(newTodo);
 
-    displayStore();
+    displayTasks();
 })();
 
-function displayStore(){
+function displayTasks(){
     const container = document.querySelector(".container");
 
-    toDoStore.forEach(tasks => {
+    storeTasks.forEach(tasks => {
         const card = document.createElement("div");
         card.classList.add("card");
         container.appendChild(card);
 
+        const checkBox = document.createElement("input");
+        checkBox.setAttribute("type", "checkbox");
+        card.appendChild(checkBox);
+
+        checkBox.addEventListener("change", function() {
+            if (this.checked){
+                storeTasks.splice(this.parentElement.getAttribute("data-index"), 1);
+                this.parentElement.remove();
+            }
+        })
         for (let eachTask in tasks){
             const txt = document.createElement("p");
-            txt.textContent = `${eachTask}: ${tasks[eachTask]}`;
+            txt.textContent = `${tasks[eachTask]}`;
             card.appendChild(txt);
         }
     });
 }
 
-console.log(toDoStore[0]);
+console.log(storeTasks[0]);
+
+class Project{
+    constructor(projectName){
+        this.projectName = projectName;
+    }
+}
 
