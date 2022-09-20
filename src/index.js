@@ -1,23 +1,39 @@
 const submitBtn = document.getElementById("submitBtn");
 const form = document.getElementById("toDo-Form");
 
-let storeTasks = [];
+storeTasks = JSON.parse(localStorage.getItem("storeTasks")) || [];
 
 // CLASS //
 class Task{
-    constructor(title){
+    constructor(title, inputDate){
         this.title = title;
+        this.date = inputDate;
     }
 }
 
 // FUNCTIONS //
+function userName(){
+    const nameInput = document.getElementById("nameInput");
+    const username = localStorage.getItem("username") || "";
+
+    nameInput.value = username;
+
+    nameInput.addEventListener("change", e => {
+        localStorage.setItem("username", e.target.value);
+    })
+}
+
 function pushTasks(){
     const title = document.getElementById("title").value;
+    const inputDate = new Date();
 
     document.getElementById("title").value = "";
 
-    const newTask = new Task(title);
+    const newTask = new Task(title, inputDate);
     storeTasks.push(newTask);
+
+    localStorage.setItem("storeTasks", JSON.stringify(storeTasks));
+
     displayTasks();
 };
 
@@ -33,7 +49,7 @@ function displayTasks(){
         const dltBtn = document.createElement("button");
 
         card.classList.add("card");
-        checkBox.setAttribute("type", "checkbox");
+        checkBox.setAttribute("type", "radio");
         checkBox.classList.add("toDo-check");
         content.classList.add("todoContent")
         editBtn.classList.add("editBtn");
@@ -59,6 +75,7 @@ function removeTasks(){
     dltBtn.addEventListener("click", function() {
             storeTasks.splice(this.parentElement.getAttribute("data-index"), 1);
             this.parentElement.remove();
+            localStorage.setItem("storeTasks", JSON.stringify(storeTasks));
     });
 }
 
@@ -73,6 +90,7 @@ function editTasks(){
             input.addEventListener("blur", e => {
                 input.setAttribute("readonly", true);
                 tasks.title = e.target.value;
+                localStorage.setItem("storeTasks", JSON.stringify(storeTasks));
                 displayTasks()
             })
         })
@@ -86,3 +104,8 @@ function handleForm(event){
 // ADD EVENT LISTENER //
 submitBtn.addEventListener("click", pushTasks);
 form.addEventListener("submit", handleForm);
+
+window.addEventListener("load", () => {
+    userName();
+    displayTasks();
+})
