@@ -38,6 +38,7 @@ function displayTasks(){
         card.classList.add("card");
         checkBox.setAttribute("type", "checkbox");
         checkBox.classList.add("toDo-check");
+        content.classList.add("todoContent")
         editBtn.classList.add("editBtn");
         dltBtn.classList.add("dltBtn");
 
@@ -51,6 +52,17 @@ function displayTasks(){
         card.appendChild(editBtn);
         card.appendChild(dltBtn)
 
+        editBtn.addEventListener("click", e => {
+            const input = content.querySelector("input")
+            input.removeAttribute("readonly");
+            input.focus();
+            input.addEventListener("blur", e => {
+                input.setAttribute("readonly", true);
+                tasks.title = e.target.value;
+                displayTasks()
+            })
+        })
+
         removeTasks()
     });
 }
@@ -61,10 +73,6 @@ function removeTasks(){
             storeTasks.splice(this.parentElement.getAttribute("data-index"), 1);
             this.parentElement.remove();
     });
-}
-
-function editTask(){
-    
 }
 
 function handleForm(event){
