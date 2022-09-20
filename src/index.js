@@ -5,21 +5,18 @@ let storeTasks = [];
 
 // CLASS //
 class Task{
-    constructor(title, dueDate){
+    constructor(title){
         this.title = title;
-        this.dueDate = dueDate;
     }
 }
 
 // FUNCTIONS //
 function pushTasks(){
     const title = document.getElementById("title").value;
-    const date = document.getElementById("date").value;
 
     document.getElementById("title").value = "";
-    document.getElementById("date").value = ""; 
 
-    const newTask = new Task(title, date);
+    const newTask = new Task(title);
     storeTasks.push(newTask);
     displayTasks();
 };
@@ -52,17 +49,7 @@ function displayTasks(){
         card.appendChild(editBtn);
         card.appendChild(dltBtn)
 
-        editBtn.addEventListener("click", e => {
-            const input = content.querySelector("input")
-            input.removeAttribute("readonly");
-            input.focus();
-            input.addEventListener("blur", e => {
-                input.setAttribute("readonly", true);
-                tasks.title = e.target.value;
-                displayTasks()
-            })
-        })
-
+        editTasks()
         removeTasks()
     });
 }
@@ -73,6 +60,23 @@ function removeTasks(){
             storeTasks.splice(this.parentElement.getAttribute("data-index"), 1);
             this.parentElement.remove();
     });
+}
+
+function editTasks(){
+    const content = document.querySelector(".todoContent");
+    const editBtn = document.querySelector(".editBtn");
+    storeTasks.forEach(tasks => {
+        editBtn.addEventListener("click", e => {
+            const input = content.querySelector("input")
+            input.removeAttribute("readonly");
+            input.focus();
+            input.addEventListener("blur", e => {
+                input.setAttribute("readonly", true);
+                tasks.title = e.target.value;
+                displayTasks()
+            })
+        })
+    })
 }
 
 function handleForm(event){
