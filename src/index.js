@@ -1,56 +1,76 @@
-let storeTasks = [];
-let storeProjects = [];
+const submitBtn = document.getElementById("submitBtn");
+const form = document.getElementById("toDo-Form");
 
+let storeTasks = [];
+
+// CLASS //
 class Task{
-    constructor(title, description, dueDate){
+    constructor(title, dueDate){
         this.title = title;
-        this.description = description;
         this.dueDate = dueDate;
     }
 }
 
-(function pushTasks(){
-    const newTodo = new Task("titre", "descriptif", "19.09.22");
-    storeTasks.push(newTodo);
+// FUNCTIONS //
+function pushTasks(){
+    const title = document.getElementById("title").value;
+    const date = document.getElementById("date").value;
 
+    document.getElementById("title").value = "";
+    document.getElementById("date").value = ""; 
+
+    const newTask = new Task(title, date);
+    storeTasks.push(newTask);
     displayTasks();
-})();
+};
 
 function displayTasks(){
     const container = document.querySelector(".container");
+    container.innerHTML = "";
 
     storeTasks.forEach(tasks => {
         const card = document.createElement("div");
-        card.classList.add("card");
-        container.appendChild(card);
-
         const checkBox = document.createElement("input");
-        checkBox.setAttribute("type", "checkbox");
-        checkBox.classList.add("toDo-check")
-        card.appendChild(checkBox);
-        removeTasks();
+        const content = document.createElement("div");
+        const editBtn = document.createElement("button");
+        const dltBtn = document.createElement("button");
 
-        for (let eachTask in tasks){
-            const txt = document.createElement("p");
-            txt.textContent = `${tasks[eachTask]}`;
-            card.appendChild(txt);
-        }
+        card.classList.add("card");
+        checkBox.setAttribute("type", "checkbox");
+        checkBox.classList.add("toDo-check");
+        editBtn.classList.add("editBtn");
+        dltBtn.classList.add("dltBtn");
+
+        content.innerHTML = `<input type=text value="${tasks.title}" readonly>`;
+        editBtn.textContent = "Edit";
+        dltBtn.textContent = "Delete"
+  
+        container.appendChild(card);
+        card.appendChild(checkBox);
+        card.appendChild(content)
+        card.appendChild(editBtn);
+        card.appendChild(dltBtn)
+
+        removeTasks()
     });
 }
 
 function removeTasks(){
-    const checkBox = document.querySelector(".toDo-check")
-    checkBox.addEventListener("change", function() {
-        if (this.checked){
+    const dltBtn = document.querySelector(".dltBtn")
+    dltBtn.addEventListener("click", function() {
             storeTasks.splice(this.parentElement.getAttribute("data-index"), 1);
             this.parentElement.remove();
-        }
-    })
+    });
 }
 
-class Project{
-    constructor(projectName){
-        this.projectName = projectName;
-    }
+function editTask(){
+    
 }
 
+function handleForm(event){
+    event.preventDefault();
+}
+
+// ADD EVENT LISTENER //
+submitBtn.addEventListener("click", pushTasks);
+form.addEventListener("submit", handleForm);
