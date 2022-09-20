@@ -11,11 +11,21 @@
     <script src="./main.js" defer></script>
 </head>
 <body>
-    <h1>To do List</h1>
-    <form id="toDo-Form">
-        <input type="text" name="title" id="title" placeholder="Titre">
-        <input type="submit" value="submit" id="submitBtn">
-    </form>
-    <div class="container"></div>
+    <header>
+        <h1>Bienvenue, </h1>
+        
+        <input type="text" id="nameInput" placeholder="Votre nom"></input>
+    </header>
+    <main>
+        <h2>Créer une tâche</h2>
+        
+        <form id="toDo-Form">
+            <label for="title">Qu'y a-t-il dans votre liste ?</label>
+            <input type="text" name="title" id="title" placeholder="e.g faire une vidéo">
+            <input type="submit" value="+ Ajouter" id="submitBtn">
+        </form>
+        <div class="container"></div>
+    </main>
+    
 </body>
 </html>
