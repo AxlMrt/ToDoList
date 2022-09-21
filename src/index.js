@@ -1,6 +1,6 @@
 const submitBtn = document.getElementById("submitBtn");
 const form = document.getElementById("toDo-Form");
-const dueDate = document.querySelector(".dueDate");
+const selectSort = document.getElementById("sortTodo")
 
 let storeTasks = JSON.parse(localStorage.getItem("storeTasks")) || [];
 
@@ -8,7 +8,7 @@ let storeTasks = JSON.parse(localStorage.getItem("storeTasks")) || [];
 class Task{
     constructor(title, inputDate, dueDate){
         this.title = title;
-        this.date = inputDate;
+        this.inputDate = inputDate;
         this.dueDate = dueDate;
     }
 }
@@ -55,7 +55,7 @@ function displayTasks(){
         editBtn.textContent = "Edit";
         dltBtn.textContent = "Delete";
 
-        if (tasks.done){ //Ton bug à cause de ça
+        if (tasks.done){
             const input = content.querySelector("input");
             checkBox.checked = true;
             input.classList.add("done");
@@ -118,7 +118,7 @@ function userName(){
     })
 }
 
-function sortsTasks(a, b){
+function sortsTasksDate(a, b){
     if (a.dueDate < b.dueDate){
         return -1;
     }
@@ -129,14 +129,31 @@ function sortsTasks(a, b){
 
 }
 
+function sortsTasksAlphabetic(a, b){
+    if (a.title < b.title){
+        return -1;
+    }
+    if (a.title > b.title){
+        return 1;
+    }
+    return 0;
+}
+
 // ADD EVENT LISTENER //
 submitBtn.addEventListener("click", pushTasks);
 form.addEventListener("submit", handleForm);
 
-dueDate.addEventListener("click", () => {
-    storeTasks.sort(sortsTasks);
-    localStorage.setItem('storeTasks', JSON.stringify(storeTasks));
-    displayTasks();
+selectSort.addEventListener("change", (event) => {
+    if (event.target.value === "0"){
+        storeTasks.sort(sortsTasksAlphabetic);
+        localStorage.setItem('storeTasks', JSON.stringify(storeTasks));
+        displayTasks();
+    }
+    if (event.target.value === "1"){
+        storeTasks.sort(sortsTasksDate);
+        localStorage.setItem('storeTasks', JSON.stringify(storeTasks));
+        displayTasks();
+    }
 })
 
 window.addEventListener("load", () => {
