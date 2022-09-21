@@ -14,10 +14,10 @@ class Task{
 // FUNCTIONS //
 function pushTasks(){
     const title = document.getElementById("title").value;
+    
     const inputDate = new Date();
 
     document.getElementById("title").value = "";
-    document.querySelectorAll("label input").value = "";
 
     const newTask = new Task(title, inputDate);
     storeTasks.push(newTask);
@@ -39,18 +39,33 @@ function displayTasks(){
         const dltBtn = document.createElement("button");
 
         card.classList.add("card");
-        checkBox.setAttribute("type", "radio");
+        checkBox.setAttribute("type", "checkbox");
         checkBox.classList.add("toDo-check");
         content.classList.add("todoContent")
         editBtn.classList.add("editBtn");
         dltBtn.classList.add("dltBtn");
 
-        content.innerHTML = `<input type=text value="${tasks.title}" readonly>`;
+        content.innerHTML = `<input type=text value="${tasks.title}" id="cardInput" readonly>`;
         editBtn.textContent = "Edit";
         dltBtn.textContent = "Delete";
 
+        if (tasks.done){
+            card.classList.add("done");
+        }
+
+        checkBox.addEventListener("change", e => {
+            const input = content.querySelector("input");
+            tasks.done = e.target.checked;
+            localStorage.setItem("storeTasks", JSON.stringify(storeTasks));
+            if (tasks.done){
+                input.classList.add("done");
+            }else{
+                input.classList.remove("done");
+            }
+        })
+
         editBtn.addEventListener("click", e => {
-            const input = content.querySelector("input")
+            const input = content.querySelector("input");
             input.removeAttribute("readonly");
             input.focus();
             input.addEventListener("blur", e => {
@@ -69,19 +84,11 @@ function displayTasks(){
   
         container.appendChild(card);
         card.appendChild(checkBox);
-        card.appendChild(content)
+        card.appendChild(content);
         card.appendChild(editBtn);
-        card.appendChild(dltBtn)
+        card.appendChild(dltBtn);
 
     });
-}
-
-function editTasks(){
-    const content = document.querySelector(".todoContent");
-    const editBtn = document.querySelector(".editBtn");
-    storeTasks.forEach(tasks => {
-        
-    })
 }
 
 function handleForm(event){
