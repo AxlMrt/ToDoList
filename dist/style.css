@@ -44,34 +44,62 @@ header h1{
 }
 
 main{
-    margin-top: 5em;
+    margin-top: 2em;
     padding: 2em
 }
 
-main h2{
+
+#toDo-Form{
+    max-width: 430px;
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+}
+
+#toDo-Form h2{
+    margin-top: 1em;
+    margin-bottom: 1em;
     text-transform: uppercase;
     letter-spacing: 2px;
     font-size: 1.3em;
     color: var(--inputColor);
 }
 
-#toDo-Form{
-    max-width: 430px;
-    display: flex;
-    flex-direction: column;
-    margin-top: 1em;
-    gap: .5em;
-}
 
-label{
-    font-weight: 700;
-    color: var(--fontColor);
-}
 
 #title{
+    width: 100%;
     font-size: 1em;
+    margin-top: .5em;
     padding: 1em;
     border-radius: 10px;
+}
+
+.option{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.option label{
+    background: var(--white);
+    width: 30%;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em;
+    border-radius: 10px;
+}
+
+.option p{
+    color: var(--inputColor)
+}
+
+
+input[type="checkbox"] {
+	border-radius: 50%;
 }
 
 #submitBtn{
@@ -104,6 +132,7 @@ label{
     max-width: 150px;
     height: 2em;
     color: var(--fontColor);
+    font-weight: 700;
 }
 
 .toDo-check{
@@ -131,9 +160,14 @@ label{
     cursor: pointer;
 }
 
+p{
+    font-weight: 700;
+    color: var(--fontColor);
+}
+
 input{
     border: none;
     outline: none;
-    color: #a1a1aa;
+    color: var(--inputColor);
 }
 
