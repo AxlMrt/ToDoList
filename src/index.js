@@ -2,7 +2,7 @@ const submitBtn = document.getElementById("submitBtn");
 const form = document.getElementById("toDo-Form");
 const dueDate = document.querySelector(".dueDate");
 
-storeTasks = JSON.parse(localStorage.getItem("storeTasks")) || [];
+let storeTasks = JSON.parse(localStorage.getItem("storeTasks")) || [];
 
 // CLASS //
 class Task{
@@ -55,14 +55,17 @@ function displayTasks(){
         editBtn.textContent = "Edit";
         dltBtn.textContent = "Delete";
 
-        if (tasks.done){
-            card.classList.add("done");
-        }
+        if (tasks.done){ //Ton bug à cause de ça
+            const input = content.querySelector("input");
+            checkBox.checked = true;
+            input.classList.add("done");
+            card.classList.add("doneCard")
+        } 
 
         checkBox.addEventListener("change", e => {
             const input = content.querySelector("input");
             tasks.done = e.target.checked;
-            localStorage.setItem("storeTasks", JSON.stringify(storeTasks));
+            
             if (tasks.done){
                 input.classList.add("done");
                 card.classList.add("doneCard")
@@ -70,6 +73,7 @@ function displayTasks(){
                 input.classList.remove("done");
                 card.classList.remove("doneCard")
             }
+            localStorage.setItem("storeTasks", JSON.stringify(storeTasks));
         })
 
         editBtn.addEventListener("click", e => {
@@ -122,6 +126,7 @@ function sortsTasks(a, b){
         return 1;
     }
     return 0;
+
 }
 
 // ADD EVENT LISTENER //
@@ -130,6 +135,7 @@ form.addEventListener("submit", handleForm);
 
 dueDate.addEventListener("click", () => {
     storeTasks.sort(sortsTasks);
+    localStorage.setItem('storeTasks', JSON.stringify(storeTasks));
     displayTasks();
 })
 
