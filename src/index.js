@@ -1,8 +1,11 @@
+import * as module from "./SortTasks"
+import { displayTasks } from "./display";
+
 const submitBtn = document.getElementById("submitBtn");
 const form = document.getElementById("toDo-Form");
 const selectSort = document.getElementById("sortTodo")
 
-let storeTasks = JSON.parse(localStorage.getItem("storeTasks")) || [];
+export let storeTasks = JSON.parse(localStorage.getItem("storeTasks")) || [];
 
 // CLASS //
 class Task{
@@ -33,76 +36,6 @@ function pushTasks(){
     displayTasks();
 };
 
-function displayTasks(){
-    const container = document.querySelector(".container");
-    container.innerHTML = "";
-
-    storeTasks.forEach(tasks => {
-        const card = document.createElement("div");
-        const checkBox = document.createElement("input");
-        const content = document.createElement("div");
-        const editBtn = document.createElement("button");
-        const dltBtn = document.createElement("button");
-
-        card.classList.add("card");
-        checkBox.setAttribute("type", "checkbox");
-        checkBox.classList.add("toDo-check");
-        content.classList.add("todoContent")
-        editBtn.classList.add("editBtn");
-        dltBtn.classList.add("dltBtn");
-
-        content.innerHTML = `<input type=text value="${tasks.title}" id="cardInput" readonly> <p>${tasks.dueDate}</p>`;
-        editBtn.textContent = "Edit";
-        dltBtn.textContent = "Delete";
-
-        if (tasks.done){
-            const input = content.querySelector("input");
-            checkBox.checked = true;
-            input.classList.add("done");
-            card.classList.add("doneCard")
-        } 
-
-        checkBox.addEventListener("change", e => {
-            const input = content.querySelector("input");
-            tasks.done = e.target.checked;
-            
-            if (tasks.done){
-                input.classList.add("done");
-                card.classList.add("doneCard")
-            }else{
-                input.classList.remove("done");
-                card.classList.remove("doneCard")
-            }
-            localStorage.setItem("storeTasks", JSON.stringify(storeTasks));
-        })
-
-        editBtn.addEventListener("click", e => {
-            const input = content.querySelector("input");
-            input.removeAttribute("readonly");
-            input.focus();
-            input.addEventListener("blur", e => {
-                input.setAttribute("readonly", true);
-                tasks.title = e.target.value;
-                localStorage.setItem("storeTasks", JSON.stringify(storeTasks));
-                displayTasks();
-            })
-        })
-
-        dltBtn.addEventListener('click', (e) => {
-			storeTasks = storeTasks.filter(t => t != tasks);
-			localStorage.setItem('storeTasks', JSON.stringify(storeTasks));
-			displayTasks();
-		})
-  
-        container.appendChild(card);
-        card.appendChild(checkBox);
-        card.appendChild(content);
-        card.appendChild(editBtn);
-        card.appendChild(dltBtn);
-
-    });
-}
-
 function handleForm(event){
     event.preventDefault();
 }
@@ -118,26 +51,6 @@ function userName(){
     })
 }
 
-function sortsTasksDate(a, b){
-    if (a.dueDate < b.dueDate){
-        return -1;
-    }
-    if (a.dueDate > b.dueDate){
-        return 1;
-    }
-    return 0;
-
-}
-
-function sortsTasksAlphabetic(a, b){
-    if (a.title < b.title){
-        return -1;
-    }
-    if (a.title > b.title){
-        return 1;
-    }
-    return 0;
-}
 
 // ADD EVENT LISTENER //
 submitBtn.addEventListener("click", pushTasks);
@@ -145,12 +58,17 @@ form.addEventListener("submit", handleForm);
 
 selectSort.addEventListener("change", (event) => {
     if (event.target.value === "0"){
-        storeTasks.sort(sortsTasksAlphabetic);
+        storeTasks.sort(module.date);
         localStorage.setItem('storeTasks', JSON.stringify(storeTasks));
         displayTasks();
     }
     if (event.target.value === "1"){
-        storeTasks.sort(sortsTasksDate);
+        storeTasks.sort(module.alphabetic);
+        localStorage.setItem('storeTasks', JSON.stringify(storeTasks));
+        displayTasks();
+    }
+    if (event.target.value === "2"){
+        storeTasks.sort(module.isDone);
         localStorage.setItem('storeTasks', JSON.stringify(storeTasks));
         displayTasks();
     }
@@ -159,4 +77,7 @@ selectSort.addEventListener("change", (event) => {
 window.addEventListener("load", () => {
     userName();
     displayTasks();
+    module.date
 })
+
+let newArr = [{}]
