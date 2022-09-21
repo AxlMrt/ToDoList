@@ -14,10 +14,13 @@ class Task{
 // FUNCTIONS //
 function pushTasks(){
     const title = document.getElementById("title").value;
-    
     const inputDate = new Date();
 
     document.getElementById("title").value = "";
+
+    if(title === ''){
+        return alert("Vous devez choisir un titre.")
+    }
 
     const newTask = new Task(title, inputDate);
     storeTasks.push(newTask);
