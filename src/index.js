@@ -1,30 +1,33 @@
 const submitBtn = document.getElementById("submitBtn");
 const form = document.getElementById("toDo-Form");
+const dueDate = document.querySelector(".dueDate");
 
 storeTasks = JSON.parse(localStorage.getItem("storeTasks")) || [];
 
 // CLASS //
 class Task{
-    constructor(title, inputDate){
+    constructor(title, inputDate, dueDate){
         this.title = title;
         this.date = inputDate;
+        this.dueDate = dueDate;
     }
 }
 
 // FUNCTIONS //
 function pushTasks(){
     const title = document.getElementById("title").value;
+    const dueDate = document.getElementById("dueDate").value;
     const inputDate = new Date();
 
     document.getElementById("title").value = "";
 
-    if(title === ''){
-        return alert("Vous devez choisir un titre.")
+    if(title === "" || dueDate === "") {
+        return alert("Vous devez remplir les champs.")
     }
 
-    const newTask = new Task(title, inputDate);
-    storeTasks.push(newTask);
+    const newTask = new Task(title, inputDate, dueDate);
 
+    storeTasks.push(newTask);
     localStorage.setItem("storeTasks", JSON.stringify(storeTasks));
 
     displayTasks();
@@ -48,7 +51,7 @@ function displayTasks(){
         editBtn.classList.add("editBtn");
         dltBtn.classList.add("dltBtn");
 
-        content.innerHTML = `<input type=text value="${tasks.title}" id="cardInput" readonly>`;
+        content.innerHTML = `<input type=text value="${tasks.title}" id="cardInput" readonly> <p>${tasks.dueDate}</p>`;
         editBtn.textContent = "Edit";
         dltBtn.textContent = "Delete";
 
@@ -62,8 +65,10 @@ function displayTasks(){
             localStorage.setItem("storeTasks", JSON.stringify(storeTasks));
             if (tasks.done){
                 input.classList.add("done");
+                card.classList.add("doneCard")
             }else{
                 input.classList.remove("done");
+                card.classList.remove("doneCard")
             }
         })
 
@@ -109,13 +114,24 @@ function userName(){
     })
 }
 
-function priorityCheck(){
-
+function sortsTasks(a, b){
+    if (a.dueDate < b.dueDate){
+        return -1;
+    }
+    if (a.dueDate > b.dueDate){
+        return 1;
+    }
+    return 0;
 }
 
 // ADD EVENT LISTENER //
 submitBtn.addEventListener("click", pushTasks);
 form.addEventListener("submit", handleForm);
+
+dueDate.addEventListener("click", () => {
+    storeTasks.sort(sortsTasks);
+    displayTasks();
+})
 
 window.addEventListener("load", () => {
     userName();
