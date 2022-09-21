@@ -97,11 +97,6 @@ main{
     color: var(--inputColor)
 }
 
-
-input[type="checkbox"] {
-	border-radius: 50%;
-}
-
 #submitBtn{
     background: var(--btnBg);
     color: var(--white);
@@ -133,11 +128,12 @@ input[type="checkbox"] {
     height: 2em;
     color: var(--fontColor);
     font-weight: 700;
+    font-size: 1.2em;
 }
 
 .toDo-check{
-    width: 2em;
-    height: 2em;
+    width: 1.5em;
+    height: 1.5em;
 }
 
 .editBtn{
@@ -171,3 +167,6 @@ input{
     color: var(--inputColor);
 }
 
+.done{
+    text-decoration: line-through;
+}
