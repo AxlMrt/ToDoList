@@ -43,7 +43,7 @@ function pushTasks(){
     document.getElementById("middle").checked = false;
     document.getElementById("high").checked = false;
 
-    if(title === "" || dueDate === "") {
+    if(title === "" || dueDate === "" || priority === "") {
         return alert("Vous devez remplir les champs.")
     }
 

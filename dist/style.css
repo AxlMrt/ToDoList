@@ -44,8 +44,24 @@ header h1{
 }
 
 main{
-    margin-top: 2em;
     padding: 2em
+}
+
+.btn{
+    display: flex;
+    justify-content: center;
+}
+
+#addBtn{
+    background: var(--white);
+    color: var(--fontColor);
+    display: flex;
+    align-items: center;
+    padding: .4em .5em;
+    font-size: 1.5em;
+    border-radius: 10px;
+    gap: .5em;
+    cursor: pointer;
 }
 
 .addTodo{
@@ -96,6 +112,13 @@ main{
     justify-content: space-between;
     padding: 1em;
     border-radius: 10px;
+
+}
+
+input[type="radio"]{
+ 
+    height: 20px;
+    width: 20px;
 }
 
 .date p{
@@ -151,6 +174,7 @@ main{
     background: var(--white);
     display: flex;
     justify-content: space-between;
+    margin-top: .8em;
     padding: .6em;
     border-radius: 10px;
     gap: .8em;
@@ -224,7 +248,11 @@ input{
 }
 
 #sortTodo{
+    background: var(--white);
+    color: var(--fontColor);
     outline: none;
+    font-size: 1.3em;
+    border-radius: 5px;
 }
 
 .done{
@@ -235,6 +263,10 @@ input{
     opacity: 0.7;
 }
 
+.empty_space span{
+    font-size: 2em;
+}
+
 .hidden{
     display: none;
 }
@@ -242,10 +274,18 @@ input{
 @media screen and (min-width: 620px){
     #toDo-Form{
         width: 620px;
+        margin-top: 2em;
         padding: 2em;
-        border: 2px solid #475569;
         border-radius: 10px;
         box-shadow: 0 2px 5px;
+    }
+
+    .empty_space span{
+        font-size: 3em;
+    }
+
+    .empty_space h2{
+        font-size: 2em;
     }
 }
 
