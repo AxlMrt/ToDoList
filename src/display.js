@@ -22,13 +22,13 @@
         editBtn.textContent = "Edit";
         dltBtn.textContent = "Delete";
 
-        if(tasks.priority === "high"){
+        if(tasks.priority === "2"){
             card.classList.add("high");
         }
-        if(tasks.priority === "middle"){
+        if(tasks.priority === "1"){
             card.classList.add("middle");
         }
-        if(tasks.priority === "low"){
+        if(tasks.priority === "0"){
             card.classList.add("low");
         }
             

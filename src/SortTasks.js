@@ -31,3 +31,37 @@ export function isDone(a){
     date()
     return 0
 }
+
+export function notDone(a){
+    if (!a.done){
+        return -1
+    }
+    if (a.done === true){
+        return 1;
+    }
+    
+    date()
+    return 0
+}
+
+export function highCheck(a, b){
+    if (a.priority > b.priority){
+        return -1;
+    }
+    if(a.priority < b.priority){
+        return 1;
+    }
+
+    return 0;
+}
+
+export function lowCheck(a, b){
+    if (a.priority < b.priority){
+        return -1;
+    }
+    if(a.priority > b.priority){
+        return 1;
+    }
+
+    return 0;
+}

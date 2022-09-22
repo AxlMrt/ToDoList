@@ -92,6 +92,21 @@ selectSort.addEventListener("change", (event) => {
         localStorage.setItem('storeTasks', JSON.stringify(storeTasks));
         displayTasks();
     }
+    if (event.target.value === "3"){
+        storeTasks.sort(module.notDone);
+        localStorage.setItem('storeTasks', JSON.stringify(storeTasks));
+        displayTasks();
+    }
+    if (event.target.value === "4"){
+        storeTasks.sort(module.highCheck);
+        localStorage.setItem('storeTasks', JSON.stringify(storeTasks));
+        displayTasks();
+    }
+    if (event.target.value === "5"){
+        storeTasks.sort(module.lowCheck);
+        localStorage.setItem('storeTasks', JSON.stringify(storeTasks));
+        displayTasks();
+    }
 })
 
 window.addEventListener("load", () => {
