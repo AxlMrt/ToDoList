@@ -22,6 +22,16 @@
         editBtn.textContent = "Edit";
         dltBtn.textContent = "Delete";
 
+        if(tasks.priority === "high"){
+            card.classList.add("high");
+        }
+        if(tasks.priority === "middle"){
+            card.classList.add("middle");
+        }
+        if(tasks.priority === "low"){
+            card.classList.add("low");
+        }
+            
         if (tasks.done){
             const input = content.querySelector("input");
             checkBox.checked = true;

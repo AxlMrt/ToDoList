@@ -7,7 +7,8 @@
     <title>To Do List</title>
 
     <link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
     <script src="./main.js" defer></script>
 </head>
 <body>
@@ -17,45 +18,52 @@
         <input type="text" id="nameInput" placeholder="Votre nom"></input>
     </header>
     <main>
-        <form id="toDo-Form">
-            <h2>Créer une tâche</h2>
-            <label for="title">
-                <p>Qu'y a-t-il dans votre liste ?</p>
-                <input type="text" name="title" id="title" placeholder="e.g faire une vidéo">
-            </label>
-            <p>Selectionnez la priorité:</p>
-          <div class="option">
-            <label for="basse">
-                <input type="radio" value="low" name="priority" id="low">
-                <p>Basse</p>
-            </label>
-            <label for="moyenne">
-                <input type="radio" value="middle" name="priority" id="middle">
-                <p>Moyenne</p>
-            </label>
-            <label for="haute">
-                <input type="radio" value="high" name="priority" id="high">
-                <p>Haute</p>
-            </label>
-          </div>
-          <div class="date">
-            <p>Selectionnez une date:</p>
-            <input type="date" name="dueDate" id="dueDate">
-          </div>
-            <input type="submit" value="+ Ajouter" id="submitBtn">
-        </form>
-
-        <div class="customSelect">
-            <select id="sortTodo">
-                <option value="0">Date</option>
-                <option value="1">Alphabétique</option>
-                <option value="2">Fait</option>
-            </select>
-        </div>
-
-        <div class="container">
-            
-        </div>
+        <section class="addTodo">
+            <form id="toDo-Form">
+                <h3>Créer une tâche</h3>
+                <label for="title">
+                    <p>Qu'y a-t-il dans votre liste ?</p>
+                    <input type="text" name="title" id="title" placeholder="e.g faire une vidéo">
+                </label>
+                <p>Selectionnez la priorité:</p>
+              <div class="option">
+                <label for="basse">
+                    <input type="radio" value="low" name="priority" id="low">
+                    <p>Basse</p>
+                </label>
+                <label for="moyenne">
+                    <input type="radio" value="middle" name="priority" id="middle">
+                    <p>Moyenne</p>
+                </label>
+                <label for="haute">
+                    <input type="radio" value="high" name="priority" id="high">
+                    <p>Haute</p>
+                </label>
+              </div>
+              <div class="date">
+                <p>Selectionnez une date:</p>
+                <input type="date" name="dueDate" id="dueDate">
+              </div>
+                <input type="submit" value="+ Ajouter" id="submitBtn">
+            </form>
+        </section>
+        
+        <section class="displayTodo">
+            <div class="customSelect">
+                <select id="sortTodo">
+                    <option value="0">Date</option>
+                    <option value="1">Alphabétique</option>
+                    <option value="2">Fait</option>
+                </select>
+            </div>
+            <div class="container"></div>
+            <div class="empty_space">
+                <span class="material-symbols-outlined">fact_check</span>
+                <h2>Ajoutez votre première tâche !</h2>
+                <p>Que voulez-vous faire aujourd'hui ?</p>
+            </div>
+        </section>
+        
     </main>
     
 </body>

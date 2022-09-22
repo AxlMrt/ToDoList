@@ -96,7 +96,7 @@ selectSort.addEventListener("change", (event) => {
 
 window.addEventListener("load", () => {
     userName();
-    displayTasks();
+    displayTasks()
     module.date
 })
 

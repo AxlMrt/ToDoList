@@ -56,7 +56,7 @@ main{
     gap: .5em;
 }
 
-#toDo-Form h2{
+#toDo-Form h3{
     margin-top: 1em;
     margin-bottom: 1em;
     text-transform: uppercase;
@@ -113,11 +113,34 @@ main{
     cursor: pointer;
 }
 
-.container{
- 
-    margin-top: 5em;
+/*ADD FIRST TASK*/
+.displayTodo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2em;
 }
 
+.container:empty{
+    display: none;
+}
+
+.empty_space{
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 1em;
+    gap: 1em;
+}
+
+.container:empty + .empty_space{
+    display: flex;
+}
+
+/* TASKS HERE*/
 .card{
     max-width: 430px;
     background: var(--white);
@@ -162,6 +185,20 @@ main{
     cursor: pointer;
 }
 
+/*TASKS PRIORITY*/
+.high{
+    border-left: 4px solid red;
+}
+
+.middle{
+    border-left: 4px solid orange;
+}
+
+.low{
+    border-left: 4px solid green;
+}
+
+/*Design*/
 p{
     font-weight: 700;
     color: var(--fontColor);
@@ -179,6 +216,10 @@ input{
     border: none;
     outline: none;
     color: var(--inputColor);
+}
+
+#sortTodo{
+    outline: none;
 }
 
 .done{
