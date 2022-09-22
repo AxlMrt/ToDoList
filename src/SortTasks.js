@@ -1,4 +1,7 @@
 import { storeTasks } from ".";
+import { displayTasks } from "./display";
+
+const selectSort = document.getElementById("sortTodo");
 
 export function date(a, b){
     if (a.dueDate < b.dueDate){
@@ -65,3 +68,36 @@ export function lowCheck(a, b){
 
     return 0;
 }
+
+selectSort.addEventListener("change", (event) => {
+    if (event.target.value === "0"){
+        storeTasks.sort(date);
+        localStorage.setItem('storeTasks', JSON.stringify(storeTasks));
+        displayTasks();
+    }
+    if (event.target.value === "1"){
+        storeTasks.sort(alphabetic);
+        localStorage.setItem('storeTasks', JSON.stringify(storeTasks));
+        displayTasks();
+    }
+    if (event.target.value === "2"){
+        storeTasks.sort(isDone);
+        localStorage.setItem('storeTasks', JSON.stringify(storeTasks));
+        displayTasks();
+    }
+    if (event.target.value === "3"){
+        storeTasks.sort(notDone);
+        localStorage.setItem('storeTasks', JSON.stringify(storeTasks));
+        displayTasks();
+    }
+    if (event.target.value === "4"){
+        storeTasks.sort(highCheck);
+        localStorage.setItem('storeTasks', JSON.stringify(storeTasks));
+        displayTasks();
+    }
+    if (event.target.value === "5"){
+        storeTasks.sort(lowCheck);
+        localStorage.setItem('storeTasks', JSON.stringify(storeTasks));
+        displayTasks();
+    }
+})

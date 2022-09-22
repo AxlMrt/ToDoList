@@ -18,8 +18,8 @@
         <input type="text" id="nameInput" placeholder="Votre nom"></input>
     </header>
     <main>
-        <section class="addTodo">
-            <button>+Ajouter une tâche</button>
+        <button id="addBtn">+Ajouter une tâche</button>
+        <section class="addTodo hidden">
             <form id="toDo-Form">
                 <h3>Créer une tâche</h3>
                 <label for="title">
@@ -50,7 +50,7 @@
         </section>
         
         <section class="displayTodo">
-            <div class="customSelect">
+            <div class="customSelect hidden">
                 <select id="sortTodo">
                     <option value="0">Date</option>
                     <option value="1">Alphabétique</option>

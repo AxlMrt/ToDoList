@@ -3,7 +3,9 @@ import { displayTasks } from "./display";
 
 const submitBtn = document.getElementById("submitBtn");
 const form = document.getElementById("toDo-Form");
-const selectSort = document.getElementById("sortTodo")
+const addContainer = document.querySelector(".addTodo");
+const addTodo = document.getElementById("addBtn");
+const customChoice = document.querySelector(".customSelect");
 
 export let storeTasks = JSON.parse(localStorage.getItem("storeTasks")) || [];
 
@@ -53,9 +55,6 @@ function pushTasks(){
     displayTasks();
 };
 
-
-
-
 function handleForm(event){
     event.preventDefault();
 }
@@ -73,46 +72,25 @@ function userName(){
 
 
 // ADD EVENT LISTENER //
-submitBtn.addEventListener("click", pushTasks);
 form.addEventListener("submit", handleForm);
 
-selectSort.addEventListener("change", (event) => {
-    if (event.target.value === "0"){
-        storeTasks.sort(module.date);
-        localStorage.setItem('storeTasks', JSON.stringify(storeTasks));
-        displayTasks();
-    }
-    if (event.target.value === "1"){
-        storeTasks.sort(module.alphabetic);
-        localStorage.setItem('storeTasks', JSON.stringify(storeTasks));
-        displayTasks();
-    }
-    if (event.target.value === "2"){
-        storeTasks.sort(module.isDone);
-        localStorage.setItem('storeTasks', JSON.stringify(storeTasks));
-        displayTasks();
-    }
-    if (event.target.value === "3"){
-        storeTasks.sort(module.notDone);
-        localStorage.setItem('storeTasks', JSON.stringify(storeTasks));
-        displayTasks();
-    }
-    if (event.target.value === "4"){
-        storeTasks.sort(module.highCheck);
-        localStorage.setItem('storeTasks', JSON.stringify(storeTasks));
-        displayTasks();
-    }
-    if (event.target.value === "5"){
-        storeTasks.sort(module.lowCheck);
-        localStorage.setItem('storeTasks', JSON.stringify(storeTasks));
-        displayTasks();
-    }
+submitBtn.addEventListener("click", () => {
+    pushTasks();
+    customChoice.classList.remove("hidden");
+    addContainer.classList.add("hidden")
+});
+
+
+addTodo.addEventListener("click", () => {   
+    addContainer.classList.remove("hidden");
 })
 
 window.addEventListener("load", () => {
     userName();
-    displayTasks()
-    module.date
+    displayTasks();
+    if(document.querySelector(".container").innerHTML != ""){
+        customChoice.classList.remove("hidden");
+    }else{
+        customChoice.classList.add("hidden");
+    }
 })
-
-let newArr = [{}]
