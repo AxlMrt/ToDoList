@@ -19,6 +19,7 @@
     </header>
     <main>
         <section class="addTodo">
+            <button>+Ajouter une tâche</button>
             <form id="toDo-Form">
                 <h3>Créer une tâche</h3>
                 <label for="title">
@@ -28,15 +29,15 @@
                 <p>Selectionnez la priorité:</p>
               <div class="option">
                 <label for="basse">
-                    <input type="radio" value="low" name="priority" id="low">
+                    <input type="radio" value="0" name="priority" id="low">
                     <p>Basse</p>
                 </label>
                 <label for="moyenne">
-                    <input type="radio" value="middle" name="priority" id="middle">
+                    <input type="radio" value="1" name="priority" id="middle">
                     <p>Moyenne</p>
                 </label>
                 <label for="haute">
-                    <input type="radio" value="high" name="priority" id="high">
+                    <input type="radio" value="2" name="priority" id="high">
                     <p>Haute</p>
                 </label>
               </div>
@@ -54,6 +55,9 @@
                     <option value="0">Date</option>
                     <option value="1">Alphabétique</option>
                     <option value="2">Fait</option>
+                    <option value="3">Non Fait</option>
+                    <option value="4">Urgent</option>
+                    <option value="5">Non Urgent</option>
                 </select>
             </div>
             <div class="container"></div>
