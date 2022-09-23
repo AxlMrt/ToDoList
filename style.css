@@ -181,7 +181,7 @@ input[type="radio"]{
 }
 
 .card input{
-    max-width: 150px;
+    max-width: 180px;
     height: 2em;
     color: var(--fontColor);
     font-weight: 700;
@@ -196,7 +196,7 @@ input[type="radio"]{
 
 .editBtn{
     background: var(--btnBg);
-    padding: 0.3em 0.5em;
+    padding: 0.6em;
     color: var(--white);
     font-weight: 700;
     border: none;
