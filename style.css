@@ -245,7 +245,10 @@ input{
     border: none;
     outline: none;
     color: var(--inputColor);
+    background: var(--white);
 }
+
+
 
 #sortTodo{
     background: var(--white);
